@@ -46,7 +46,7 @@ Since this is a frontend-only project, you can deploy it easily on GitHub Pages,
 
 ## API Integration
 ResuMeme sends resume data to an API for analysis:
-- **Endpoint:** `https://tanu360-ai-api.deno.dev/v1/chat/completions`
+- **Endpoint:** ``
 - **Model Used:** `o3-mini`
 - **Response Format:** JSON
 
