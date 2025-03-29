@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Reviewer</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Reviewer - AI-Powered Resume Analysis</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Resume Reviewer is an AI-powered tool that analyzes resumes for ATS compatibility, grammatical errors, and strengths, with an optional humorous roast." />
+    <meta name="keywords"
+        content="resume analysis, AI resume checker, ATS resume review, resume optimization, job application, resume improvement" />
+    <meta name="author" content="Your Name or Company" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Resume Reviewer - AI-Powered Resume Analysis" />
+    <meta property="og:description"
+        content="Optimize your resume with AI-powered insights, ATS checks, and a touch of humor!" />
+    <meta property="og:url" content="https://yourwebsite.com/" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Resume Reviewer - AI-Powered Resume Analysis" />
+    <meta name="twitter:description"
+        content="Analyze your resume with AI! Get ATS scores, grammatical checks, and even a funny roast." />
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://img.icons8.com/stickers/100/parse-from-clipboard.png" type="image/x-icon" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2em;
+        }
+
+        #output,
+        #result {
+            border: 1px solid #ccc;
+            padding: 1em;
+            margin-top: 1em;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        #result {
+            border-color: #0066cc;
+            background: #f0f8ff;
+        }
+
+        #loader {
+            display: none;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 1em;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js";
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lexend+Mega:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+        .bebas-neue-regular {
+            font-family: "Bebas Neue", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .space-mono-regular {
+            font-family: "Space Mono", monospace;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .space-mono-bold {
+            font-family: "Space Mono", monospace;
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        .space-mono-regular-italic {
+            font-family: "Space Mono", monospace;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .space-mono-bold-italic {
+            font-family: "Space Mono", monospace;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            font-family: 'Space Mono', sans-serif;
+            color: #333;
+            background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='20' height='20' patternTransform='scale(4) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='%23ffffffff'/><path d='M 10,-2.55e-7 V 20 Z M -1.1677362e-8,10 H 20 Z'  stroke-width='0.5' stroke='%230000005d' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(%23a)'/></svg>");
+
+        }
+
+        .main {
+            display: flex;
+            min-width: 80%;
+            max-width: 80%;
+            margin-bottom: 2em;
+            flex-direction: column;
+            align-items: left;
+            justify-content: center;
+            background-color: #fff;
+            padding: 2em;
+            border-radius: 15px;
+            border: 3px solid #333;
+            border-bottom: 8px solid #333;
+            border-right: 8px solid #333;
+        }
+
+        input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .fileUploadSpan {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+            font-size: 3em;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        input[type="file"] {
+            width: max-content;
+        }
+
+        input[type="file"]::file-selector-button {
+            background-color: #3dd29d;
+            color: white;
+            font-weight: bold;
+            border: 2px solid black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Space Mono', sans-serif;
+        }
+
+
+        input[type='file'] {
+            font-size: 0;
+        }
+
+        ::file-selector-button {
+            font-size: initial;
+        }
+
+        #dropArea {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            border-radius: 5px;
+            background-color: #3dd29e18;
+            color: #333;
+            font-family: 'Space Mono', sans-serif;
+            font-size: 1.2em;
+            padding: 4em;
+        }
+
+        #output {
+
+            display: none;
+            flex-direction: column;
+            align-items: left;
+            justify-content: center;
+            background-color: #fff;
+            padding: 2em;
+            border-radius: 15px;
+            border: 3px solid #333;
+            border-bottom: 8px solid #333;
+            border-right: 8px solid #333;
+            margin-bottom: 2em;
+            max-width: 80%;
+        }
+
+        .resultDiv {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h1>ResuMeme</h1>
+        <p>An AI-powered resume analyzer that evaluates ATS score, identifies strengths and mistakes, and offers a
+            humorous roast.</p>
+
+        <div id="dropArea">
+            Drag and drop your Resume PDF here or click to upload
+        </div>
+        <span class="fileUploadSpan">
+            <sub>OR</sub>
+            <input type="file" id="fileInput" accept="application/pdf" required />
+        </span>
+
+        <script>
+            const dropArea = document.getElementById('dropArea');
+
+            dropArea.addEventListener('dragover', (event) => {
+                event.preventDefault();
+                dropArea.style.borderColor = '#0066cc';
+                dropArea.style.backgroundColor = '#f0f8ff';
+            });
+
+            dropArea.addEventListener('dragleave', () => {
+                dropArea.style.borderColor = '#ccc';
+                dropArea.style.backgroundColor = 'transparent';
+            });
+
+            dropArea.addEventListener('drop', (event) => {
+                event.preventDefault();
+                dropArea.style.borderColor = '#ccc';
+                dropArea.style.backgroundColor = 'transparent';
+
+                const file = event.dataTransfer.files[0];
+                if (file && file.type === 'application/pdf') {
+                    const reader = new FileReader();
+                    reader.onload = function () {
+                        const typedarray = new Uint8Array(this.result);
+                        extractTextFromPDF(typedarray);
+                    };
+                    reader.readAsArrayBuffer(file);
+                } else {
+                    alert('Please upload a valid PDF file.');
+                }
+            });
+        </script>
+    </div>
+    <div id="output"></div>
+    <div id="loader">Processing...</div>
+    <div class="resultDiv main">
+        <h2>Result</h2>
+        <div id="result">The response from the chat API will be displayed here.</div>
+    </div>
+
+    <script>
+
+        function _0xc5d9(_0x323bcd, _0xec2383) { const _0x3e6f23 = _0x3e6f(); return _0xc5d9 = function (_0xc5d921, _0x47c7d0) { _0xc5d921 = _0xc5d921 - 0x19f; let _0x2afba9 = _0x3e6f23[_0xc5d921]; return _0x2afba9; }, _0xc5d9(_0x323bcd, _0xec2383); } const _0x3b199d = _0xc5d9; (function (_0x4e54b2, _0x11e899) { const _0x4b5d82 = _0xc5d9, _0x1767a3 = _0x4e54b2(); while (!![]) { try { const _0xa04a61 = parseInt(_0x4b5d82(0x1de)) / 0x1 + -parseInt(_0x4b5d82(0x1bd)) / 0x2 + -parseInt(_0x4b5d82(0x1d7)) / 0x3 + -parseInt(_0x4b5d82(0x1b0)) / 0x4 * (-parseInt(_0x4b5d82(0x19f)) / 0x5) + parseInt(_0x4b5d82(0x1cf)) / 0x6 + parseInt(_0x4b5d82(0x1bf)) / 0x7 + -parseInt(_0x4b5d82(0x1c6)) / 0x8 * (parseInt(_0x4b5d82(0x1a0)) / 0x9); if (_0xa04a61 === _0x11e899) break; else _0x1767a3['push'](_0x1767a3['shift']()); } catch (_0x449480) { _0x1767a3['push'](_0x1767a3['shift']()); } } }(_0x3e6f, 0x62871)); const outputContainer = document[_0x3b199d(0x1a9)](_0x3b199d(0x1c8)), resultContainer = document[_0x3b199d(0x1a9)](_0x3b199d(0x1b5)), loader = document[_0x3b199d(0x1a9)](_0x3b199d(0x1c3)); async function sendResumeData(_0x13486c) { const _0x1c156d = _0x3b199d, _0x28e685 = 'https://tanu360-ai-api.deno.dev/v1/chat/completions', _0x53e5df = { 'model': _0x1c156d(0x1a4), 'stream': ![], 'messages': [{ 'role': _0x1c156d(0x1ae), 'content': '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22Act\x20as\x20an\x20expert\x20resume\x20reviewer\x20with\x20a\x20keen\x20eye\x20for\x20detail\x20and\x20a\x20comprehensive\x20understanding\x20of\x20hiring\x20practices.\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20I\x20will\x20provide\x20you\x20with\x20a\x20resume,\x20and\x20I\x20would\x20like\x20you\x20to\x20perform\x20the\x20following\x20tasks:\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Overall\x20Assessment:\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Evaluate\x20the\x20general\x20structure,\x20layout,\x20and\x20design.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Comment\x20on\x20readability\x20and\x20organization.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Content\x20Review:\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Analyze\x20each\x20section\x20(Contact\x20Information,\x20Professional\x20Summary,\x20Work\x20Experience,\x20Education,\x20Skills,\x20Certifications,\x20etc.).\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Identify\x20any\x20errors,\x20inconsistencies,\x20or\x20areas\x20lacking\x20detail.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Highlight\x20any\x20jargon,\x20buzzwords,\x20or\x20vague\x20language\x20that\x20may\x20require\x20clarification.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Tailoring\x20to\x20the\x20Job:\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Assess\x20whether\x20the\x20resume\x20is\x20clearly\x20tailored\x20to\x20the\x20job\x20role\x20it\x20targets.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Suggest\x20ways\x20to\x20better\x20align\x20skills,\x20experiences,\x20and\x20achievements\x20with\x20the\x20job\x20description.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Impact\x20and\x20Results:\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Evaluate\x20the\x20use\x20of\x20impactful\x20language\x20and\x20quantifiable\x20achievements.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Provide\x20feedback\x20on\x20areas\x20where\x20bullet\x20points\x20or\x20metrics\x20could\x20strengthen\x20the\x20resume.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20SEO\x20and\x20ATS\x20Optimization:\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Check\x20for\x20keywords\x20relevant\x20to\x20the\x20industry\x20and\x20job\x20role.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Identify\x20potential\x20formatting\x20issues\x20that\x20could\x20hinder\x20parsing\x20by\x20Applicant\x20Tracking\x20Systems\x20(ATS).\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Grammar\x20and\x20Spelling:\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Highlight\x20any\x20grammatical\x20or\x20spelling\x20errors.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Provide\x20suggestions\x20for\x20clearer,\x20more\x20professional\x20language\x20where\x20needed.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Additional\x20Suggestions:\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Offer\x20overall\x20suggestions\x20to\x20enhance\x20the\x20candidate\x27s\x20narrative.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Recommend\x20any\x20additional\x20sections\x20or\x20modifications\x20that\x20can\x20make\x20the\x20resume\x20stand\x20out.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20' }, { 'role': _0x1c156d(0x1dd), 'content': '\x20' + _0x13486c + _0x1c156d(0x1b7) }, { 'role': _0x1c156d(0x1dd), 'content': '\x20' + _0x13486c + _0x1c156d(0x1c9) }] }; try { loader[_0x1c156d(0x1d8)][_0x1c156d(0x1cc)] = _0x1c156d(0x1dc), resultContainer[_0x1c156d(0x1c4)] = ''; const _0x39863e = await fetch(_0x28e685, { 'method': _0x1c156d(0x1ac), 'headers': { 'Accept': 'application/json', 'Content-Type': 'application/json' }, 'body': JSON[_0x1c156d(0x1d5)](_0x53e5df) }); if (!_0x39863e['ok']) throw new Error('Failed\x20to\x20fetch\x20response'); const _0x46559a = await _0x39863e[_0x1c156d(0x1da)](); if (!_0x46559a['choices'] || _0x46559a[_0x1c156d(0x1b1)][_0x1c156d(0x1ca)] === 0x0) throw new Error(_0x1c156d(0x1b2)); resultContainer[_0x1c156d(0x1a3)][_0x1c156d(0x1a5)]('resultDiv'), resultContainer['style'][_0x1c156d(0x1cc)] = _0x1c156d(0x1dc), resultContainer[_0x1c156d(0x1d8)]['flexDirection'] = _0x1c156d(0x1a2), resultContainer[_0x1c156d(0x1d8)][_0x1c156d(0x1c2)] = _0x1c156d(0x1a1), resultContainer[_0x1c156d(0x1d8)][_0x1c156d(0x1d6)] = _0x1c156d(0x1b3), resultContainer[_0x1c156d(0x1d8)][_0x1c156d(0x1db)] = _0x1c156d(0x1b6), resultContainer['innerHTML'] = _0x46559a['choices'][0x0]?.[_0x1c156d(0x1cd)]?.[_0x1c156d(0x1a7)] || _0x1c156d(0x1c0); } catch (_0x5b7e46) { console[_0x1c156d(0x1a6)](_0x1c156d(0x1ad), _0x5b7e46), resultContainer[_0x1c156d(0x1ba)] = _0x1c156d(0x1c5); } finally { loader[_0x1c156d(0x1d8)][_0x1c156d(0x1cc)] = _0x1c156d(0x1d4); } } function extractTextFromPDF(_0x4390e1) { const _0x3245d9 = _0x3b199d; pdfjsLib[_0x3245d9(0x1b9)](_0x4390e1)['promise'][_0x3245d9(0x1bc)](async function (_0x64415e) { const _0x2a047e = _0x3245d9; let _0x51dd85 = ''; outputContainer[_0x2a047e(0x1d8)][_0x2a047e(0x1cc)] = _0x2a047e(0x1cb), outputContainer['style'][_0x2a047e(0x1d9)] = _0x2a047e(0x1a2), outputContainer[_0x2a047e(0x1d8)][_0x2a047e(0x1c2)] = _0x2a047e(0x1a1), outputContainer[_0x2a047e(0x1d8)]['justifyContent'] = _0x2a047e(0x1b3), outputContainer[_0x2a047e(0x1d8)][_0x2a047e(0x1db)] = _0x2a047e(0x1b6), outputContainer[_0x2a047e(0x1d8)]['borderRadius'] = _0x2a047e(0x1aa); for (let _0x3b2874 = 0x1; _0x3b2874 <= _0x64415e[_0x2a047e(0x1be)]; _0x3b2874++) { const _0x3501d9 = await _0x64415e['getPage'](_0x3b2874), _0x38da81 = await _0x3501d9[_0x2a047e(0x1d1)](); _0x51dd85 += _0x38da81['items'][_0x2a047e(0x1af)](_0x4f1112 => _0x4f1112['str'])[_0x2a047e(0x1a8)]('\x20') + '\x0a\x0a'; } outputContainer['innerHTML'] += '<strong>Parsed\x20Text:</strong>', outputContainer[_0x2a047e(0x1c4)] += _0x2a047e(0x1b8), outputContainer[_0x2a047e(0x1c4)] += _0x2a047e(0x1d0) + _0x51dd85 + '</p>', sendResumeData(_0x51dd85); })[_0x3245d9(0x1bb)](_0x11a19f => { const _0x112b60 = _0x3245d9; console[_0x112b60(0x1a6)](_0x112b60(0x1ab), _0x11a19f), outputContainer[_0x112b60(0x1ba)] = 'Error\x20reading\x20PDF\x20file.'; }); } function _0x3e6f() { const _0x29d283 = ['434716DcmVXk', 'numPages', '1883294plzEWA', 'No\x20response\x20received.', 'Please\x20upload\x20a\x20valid\x20PDF\x20file.', 'alignItems', 'loader', 'innerHTML', 'Error\x20processing\x20the\x20resume.', '3824SyPHbJ', 'type', 'output', '\x20Now\x20roast\x20the\x20resume\x20be\x20\x20brutal\x20and\x20rude', 'length', 'flex', 'display', 'message', 'application/pdf', '4629810qjiKZN', '<p\x20style=\x27word-break:\x20break;\x27>', 'getTextContent', 'readAsArrayBuffer', 'onload', 'none', 'stringify', 'justifyContent', '1560282rwwqvW', 'style', 'flexDirection', 'json', 'backgroundColor', 'block', 'user', '591619slJgtE', '5smxjTb', '17010ToQxTQ', 'left', 'column', 'classList', 'o3-mini', 'add', 'error', 'content', 'join', 'getElementById', '15px', 'Error\x20reading\x20PDF:', 'POST', 'Error\x20sending\x20resume\x20data:', 'system', 'map', '1648580HJCahh', 'choices', 'No\x20choices\x20in\x20response', 'center', 'files', 'result', '#fff', '\x20in\x201000\x20words\x20page\x20content', '<br>', 'getDocument', 'textContent', 'catch', 'then']; _0x3e6f = function () { return _0x29d283; }; return _0x3e6f(); } document['getElementById']('fileInput')['addEventListener']('change', function (_0x5be6a1) { const _0x842e43 = _0x3b199d, _0x59807d = _0x5be6a1['target'][_0x842e43(0x1b4)][0x0]; if (_0x59807d && _0x59807d[_0x842e43(0x1c7)] === _0x842e43(0x1ce)) { const _0x109b13 = new FileReader(); _0x109b13[_0x842e43(0x1d3)] = function () { const _0x360e94 = _0x842e43, _0x58a0b5 = new Uint8Array(this[_0x360e94(0x1b5)]); extractTextFromPDF(_0x58a0b5); }, _0x109b13[_0x842e43(0x1d2)](_0x59807d); } else alert(_0x842e43(0x1c1)); });
+    </script>
+</body>
+
+</html>
