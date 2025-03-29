@@ -27,7 +27,7 @@ Ensure you have a modern web browser that supports JavaScript.
 ### Running the Project Locally
 1. Clone the repository:
    ```sh
-  git clone https://github.com/adithyapaib/resuMeme
+    git clone https://github.com/adithyapaib/resuMeme
    ```
 2. Navigate to the project directory:
    ```sh
